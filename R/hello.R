@@ -5,7 +5,7 @@
 #' @examples
 #' hello("world")
 hello <- function(name) {
-    return(
-        paste("Hello", name)
-    )
+  return(
+    paste("Hello", name)
+  )
 }
