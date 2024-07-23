@@ -8,7 +8,8 @@ on:
   release:
     types: [published]
   workflow_dispatch:
-
+  workflow_call:
+    
 permissions:
   contents: write
   pull-requests: write

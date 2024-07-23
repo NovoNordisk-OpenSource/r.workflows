@@ -8,7 +8,11 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch:
+  workflow_call:
+    # define inputs for the workflow
 permissions: read-all
+
 
 name: R-CMD-check-versions
 
