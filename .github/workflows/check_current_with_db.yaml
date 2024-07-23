@@ -43,7 +43,7 @@
         env:
           GITHUB_PAT: ${{secrets.CONNECTOR_ACTION_PAT}}
           R_KEEP_PKG_SOURCE: true
-          POSTGRES_PW: ${{input.password_db}}
+          POSTGRES_PW: ${{inputs.password_db}}
         steps:
           - uses: actions/checkout@v4
           - uses: r-lib/actions/setup-pandoc@v2
