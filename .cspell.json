@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en",
-  "ignorePaths": [".github/**", "man/**", "README.md"],
+  "ignorePaths": [".github/**", "man/**", "README.md", ".gitignore", ".Rbuildignore"],
   "patterns": [
     {
       "name": "code_chunk",
