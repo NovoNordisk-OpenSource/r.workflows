@@ -25,8 +25,6 @@ env:
   APPLY_FIXES_MODE: pull_request
   KICS_EXCLUDE_QUERIES: 555ab8f9-2001-455e-a077-f2d0f41e2fb9 # Exclude check: https://docs.kics.io/latest/queries/cicd-queries/common/555ab8f9-2001-455e-a077-f2d0f41e2fb9/
   SPELL_LYCHEE_FILE_EXTENSIONS: '*' # Check all file types for dead links
-  SPELL_CSPELL_RULES_PATH: https://github.com/NN-OpenSource/actions/tree/main/.github/linters
-  R_LINTR_RULES_PATH: https://github.com/NN-OpenSource/actions/tree/main/.github/linters
   
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -49,6 +47,12 @@ jobs:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
 
+      - name: Copy files for linters
+        run: |
+          wget -O .lintr https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.lintr
+          wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
+
+        shell: bash
       - name: MegaLinter
         id: ml
         uses: oxsecurity/megalinter@v7
