@@ -56,9 +56,9 @@ jobs:
 
       - name: Copy files for linters
         run: |
-            cp .actions/.github/linters/.cspell.json .cspell.json
-            cp .actions/.github/linters/.lintr .lintr
-            rm -rf .actions
+            cp /home/runner/work/actions/actions/.actions/.github/linters/.cspell.json .cspell.json
+            cp /home/runner/work/actions/actions/.actions/.github/linters/.lintr .lintr
+            rm -rf /home/runner/work/actions/actions/.actions
       #     wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
         shell: bash
       - name: MegaLinter
