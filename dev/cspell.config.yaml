@@ -9,4 +9,3 @@ patterns:
     pattern: "`{3}.*?`{3}"
 ignoreRegExpList:
   - code_chunk
-  
