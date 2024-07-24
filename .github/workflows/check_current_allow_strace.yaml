@@ -11,7 +11,7 @@ on:
       - master
   workflow_dispatch:
   workflow_call:
-    
+
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
@@ -29,7 +29,7 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
-      GITHUB_PAT: ${{ secrets.WHIRL_ACTION_PAT }}
+      GITHUB_PAT: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
 
     steps:

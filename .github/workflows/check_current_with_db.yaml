@@ -40,7 +40,7 @@ jobs:
           - os: ubuntu-latest
             r: oldrel-1
     env:
-      GITHUB_PAT: ${{secrets.CONNECTOR_ACTION_PAT}}
+      GITHUB_PAT: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: true
       POSTGRES_PW: ${{inputs.password_db}}
     steps:
