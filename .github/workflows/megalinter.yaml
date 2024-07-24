@@ -40,33 +40,35 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-
-      - name: Checkout for actions files
+      - name: Checkout target repository
         uses: actions/checkout@v4
         with:
-          repository: NN-OpenSource/actions
-          path: ".actions"
+          repository: 'nn-opensource/actions'
           token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
-          fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
-
+          ref: main
+          path: ./myactions
+  
       - name: Copy files for linters
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
         run: |
-            cp /home/runner/work/actions/actions/.actions/.github/linters/.cspell.json .cspell.json
-            cp /home/runner/work/actions/actions/.actions/.github/linters/.lintr .lintr
-            rm -rf /home/runner/work/actions/actions/.actions
-      #     wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
+            cd ./myactions 
+            cp .github/linters/.cspell.json ../.cspell.json
+            cp .github/linters/.lintr ../.lintr
         shell: bash
+        
       - name: MegaLinter
         id: ml
         uses: oxsecurity/megalinter@v7
         env:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Validates all source when push on main, else just the git diff with main. Override with true if you always want to lint all sources
           GITHUB_TOKEN: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
 
       - name: Archive production artifacts
         if: success() || failure()
