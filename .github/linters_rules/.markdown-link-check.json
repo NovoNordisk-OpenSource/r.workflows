@@ -1,9 +1,0 @@
-{
-  "retryOn429": true,
-  "retryCount": 10,
-  "ignorePatterns": [
-    {
-      "pattern": "(github\\.com/oxsecurity/megalinter/tree/main/docs)"
-    }
-  ]
-}
