@@ -41,16 +41,23 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Checkout Code
-        uses: actions/checkout@v3
+      - name: Checkout for actions files
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
+          repository: NN-OpenSource/actions
+          path: '~/actions'
+          token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
 
       - name: Copy files for linters
         run: |
-            cp dev/linters/.cspell.json .cspell.json
-            cp dev/linters/.lintr .lintr
+            cp ~/actions/.github/linters/.cspell.json .cspell.json
+            cp ~/actions/.github/linters/.lintr .lintr
       #     wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
         shell: bash
       - name: MegaLinter
@@ -58,7 +65,7 @@ jobs:
         uses: oxsecurity/megalinter@v7
         env:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Validates all source when push on main, else just the git diff with main. Override with true if you always want to lint all sources
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
 
       - name: Archive production artifacts
         if: success() || failure()
