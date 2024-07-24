@@ -47,10 +47,10 @@ jobs:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
 
-      - name: Copy files for linters
-        run: |
-          wget -O .lintr https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.lintr
-          wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
+      # - name: Copy files for linters
+      #   run: |
+      #     wget -O .lintr https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.lintr
+      #     wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
 
         shell: bash
       - name: MegaLinter
