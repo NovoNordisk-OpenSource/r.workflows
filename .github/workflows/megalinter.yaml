@@ -45,6 +45,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: NN-OpenSource/actions
+          path: ".actions"
           token: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
 
       - name: Checkout Code
@@ -55,8 +56,9 @@ jobs:
 
       - name: Copy files for linters
         run: |
-            cp ~/actions/.github/linters/.cspell.json .cspell.json
-            cp ~/actions/.github/linters/.lintr .lintr
+            cp .actions/.github/linters/.cspell.json .cspell.json
+            cp .actions/.github/linters/.lintr .lintr
+            rm -rf .actions
       #     wget -O .cspell.json https://github.com/NN-OpenSource/actions/tree/main/.github/linters/.cspell.json
         shell: bash
       - name: MegaLinter
