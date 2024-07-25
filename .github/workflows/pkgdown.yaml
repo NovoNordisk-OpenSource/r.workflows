@@ -9,6 +9,10 @@ on:
     types: [published]
   workflow_dispatch:
   workflow_call:
+    secrets:
+      access-token:
+        description: 'A token passed from the caller workflow'
+        required: false
 
 permissions:
   contents: write
@@ -23,7 +27,7 @@ jobs:
     concurrency:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
-      GITHUB_PAT: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
     steps:
       - uses: actions/checkout@v4
 
