@@ -10,9 +10,12 @@ on:
       - master
   workflow_dispatch:
   workflow_call:
-    # define inputs for the workflow
-permissions: read-all
+    secrets:
+      access-token:
+        description: 'A token passed from the caller workflow'
+        required: false
 
+permissions: read-all
 
 name: R-CMD-check-versions
 
@@ -33,7 +36,7 @@ jobs:
           - date: 2023-10-25    # 08mar2024: Next release date for SCE-R
             r: 4.3.1
     env:
-      GITHUB_PAT: ${{ secrets.ACTION_PAT || secrets.GITHUB_TOKEN }}
+      GITHUB_PAT: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
       R_KEEP_PKG_SOURCE: yes
 
     steps:
