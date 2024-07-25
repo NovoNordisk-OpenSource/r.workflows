@@ -44,7 +44,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'nn-opensource/actions'
-          token: ${{ secrets.GITHUB_TOKEN}}
+          token: ${{ secrets.ACTION_PAT}}
           ref: main
           path: ./myactions
   
