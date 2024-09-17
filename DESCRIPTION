@@ -1,8 +1,10 @@
-Package: actions
+Package: r.workflows
 Title: R package workflows
-Version: 0.0.0.9000
-Authors@R: 
-    person("cervan", "girard", , "cgid@novonordisk.com", role = c("aut", "cre"))
+Version: 0.0.1
+Authors@R: c(
+    person("Cervan", "Girard", , "cgid@novonordisk.com", role = c("aut", "cre")),
+    person("Aksel", "Thomsen", , "oath@novonordisk.com", role = c("aut"))
+    )
 Description: Only here to have R package workflows.
 License: Apache License (>= 2)
 Encoding: UTF-8
