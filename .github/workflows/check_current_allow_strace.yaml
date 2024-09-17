@@ -10,12 +10,6 @@ on:
       - main
       - master
   workflow_dispatch:
-  workflow_call:
-    secrets:
-      access-token:
-        description: 'A token passed from the caller workflow'
-        required: false
-
 
 jobs:
   R-CMD-check:
@@ -34,7 +28,6 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-1'}
 
     env:
-      GITHUB_PAT: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
       R_KEEP_PKG_SOURCE: yes
     
     steps:

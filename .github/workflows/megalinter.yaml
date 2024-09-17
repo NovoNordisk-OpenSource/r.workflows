@@ -11,11 +11,6 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
-  workflow_call:
-    secrets:
-      access-token:
-        description: 'A token passed from the caller workflow'
-        required: false
         
 permissions:
   contents: write
@@ -47,8 +42,7 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
-          repository: 'nn-opensource/actions'
-          token: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
+          repository: 'NovoNordisk-OpenSource/r.workflows'
           ref: main
           path: ./myactions
   
@@ -65,12 +59,10 @@ jobs:
         uses: oxsecurity/megalinter@v7
         env:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} # Validates all source when push on main, else just the git diff with main. Override with true if you always want to lint all sources
-          GITHUB_TOKEN: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
 
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
 
       - name: Archive production artifacts
