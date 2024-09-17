@@ -1,6 +1,5 @@
 ---
-# Workflow adjusted from usethis::use_github_action("test-coverage") to just report coverage internally and not to publish to codecov
-
+name: test-coverage
 on:
   push:
     branches:
@@ -10,12 +9,10 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch:
-
+  workflow_dispatch: null
 permissions:
   contents: read
   pull-requests: write
-name: test-coverage-internal
 jobs:
   test-coverage-internal:
     runs-on: ubuntu-latest
@@ -60,7 +57,7 @@ jobs:
 
           c("# Code coverage", res) |>
             writeLines(con = "coverage.md")
-        shell: Rscript {0}
+        shell: 'Rscript {0}'
       - name: Add Coverage PR Comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
