@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(actions)
+library(r.workflows)
 
-test_check("actions")
+test_check("r.workflows")
