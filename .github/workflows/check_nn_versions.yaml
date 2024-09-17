@@ -23,9 +23,9 @@ jobs:
           - windows-latest
           - ubuntu-latest
         config:
-          - date: 2023-10-25T00:00:00.000Z
+          - date: 2023-10-25
             r: 4.3.1
-          - date: 2024-08-06T00:00:00.000Z
+          - date: 2024-08-06
             r: 4.4.1
     env:
       R_KEEP_PKG_SOURCE: 'yes'
