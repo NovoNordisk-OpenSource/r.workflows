@@ -9,7 +9,7 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch: null
+  workflow_dispatch:
   workflow_call:
     inputs:
       password_db:
