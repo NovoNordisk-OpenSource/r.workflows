@@ -11,7 +11,8 @@ on:
       - master
   workflow_dispatch:
   workflow_call:
-permissions: read-all
+permissions:
+  contents: read
 jobs:
   R-CMD-check:
     runs-on: '${{ matrix.os }}'
