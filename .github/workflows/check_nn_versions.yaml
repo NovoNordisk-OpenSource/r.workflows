@@ -9,7 +9,8 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch: null
+  workflow_dispatch:
+  workflow_call:
 permissions: read-all
 jobs:
   R-CMD-check:
@@ -46,10 +47,8 @@ jobs:
             repos = c(CRAN = "https://packagemanager.posit.co/cran/${{matrix.config.date }}")
             )
 
-
           install.packages(c("attachment", "rcmdcheck"), Ncpus =
           parallel::detectCores()-1)
-
 
           attachment::att_from_description(field = c("Depends", "Imports",
           "Suggests")) |>
