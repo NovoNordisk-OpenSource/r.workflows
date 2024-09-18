@@ -9,7 +9,10 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch: null
+  workflow_dispatch:
+  workflow_call:
+permissions:
+  contents: read
 jobs:
   R-CMD-check:
     runs-on: '${{ matrix.config.os }}'
