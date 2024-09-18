@@ -12,12 +12,8 @@ on:
   release:
     types:
       - published
-  workflow_dispatch: null
+  workflow_dispatch:
   workflow_call:
-    secrets:
-      access-token:
-        description: A token passed from the caller workflow
-        required: false
 permissions:
   contents: write
   pull-requests: write
