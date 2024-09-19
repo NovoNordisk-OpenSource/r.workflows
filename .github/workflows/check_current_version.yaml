@@ -1,5 +1,5 @@
 ---
-name: R-CMD-check standard¨
+name: R-CMD-check standard
 on:
   push:
     branches:
