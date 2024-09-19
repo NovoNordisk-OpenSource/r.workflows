@@ -13,13 +13,13 @@ on:
     types:
       - published
   workflow_dispatch:
-    workflow_call:
-      inputs:
-        setup:
-          description: Use composite .github/actions/setup/action.yaml to setup package specific needs
-          required: false
-          type: boolean
-          default: false
+  workflow_call:
+    inputs:
+      setup:
+        description: Use composite .github/actions/setup/action.yaml to setup package specific needs
+        required: false
+        type: boolean
+        default: false
 permissions:
   contents: write
   pull-requests: write
