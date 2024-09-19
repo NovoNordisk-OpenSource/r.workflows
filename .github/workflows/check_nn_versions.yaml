@@ -57,12 +57,14 @@ jobs:
             repos = c(CRAN = "https://packagemanager.posit.co/cran/${{matrix.config.date }}")
             )
 
-          install.packages(c("attachment", "rcmdcheck"), Ncpus =
+          install.packages(c("attachment", "rcmdcheck", "pak"), Ncpus =
           parallel::detectCores()-1)
 
+          pak::pak_update()
+
           attachment::att_from_description(field = c("Depends", "Imports",
-          "Suggests")) |>
-            install.packages(Ncpus = parallel::detectCores()-1)
+          "Suggests", "Remotes")) |>
+            pak::pkg_install()
         shell: 'Rscript {0}'
       - name: Session info
         run: |
