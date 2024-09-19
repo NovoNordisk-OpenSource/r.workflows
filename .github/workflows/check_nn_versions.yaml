@@ -62,8 +62,11 @@ jobs:
 
           pak::pak_update()
 
+          attachment::att_from_description(field = c("Remotes")) |> 
+            pak::pak()
+
           attachment::att_from_description(field = c("Depends", "Imports",
-          "Suggests", "Remotes")) |>
+          "Suggests")) |>
             pak::pkg_install()
         shell: 'Rscript {0}'
       - name: Session info
