@@ -68,7 +68,7 @@ runs:
       uses: quarto-dev/quarto-actions/setup@v2
 ```
 
-Using e.g. the `R-CMD-check standard` workflow all you need to do is to call it with the input `setup: true` and the action above will be executed just after checking out your repository:
+Using e.g. the `R-CMD-check standard` workflow all you need to do is to call it with the input `use_local_setup_action: true` and the action above will be executed just after checking out your repository:
 
 ```yaml
 ...
@@ -78,7 +78,7 @@ jobs:
     uses: >-
       NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
     with:
-      setup: true
+      use_local_setup_action: true
 ...
 ```
 You can of course add much more complicated setup steps this way, but now Quarto is available for all following steps in the `R-CMD-check standard` workflow.
