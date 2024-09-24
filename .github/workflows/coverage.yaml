@@ -11,6 +11,12 @@ on:
       - master
   workflow_dispatch:
   workflow_call:
+    inputs:
+      use_local_setup_action:
+        description: Use composite .github/actions/setup/action.yaml to setup package specific needs
+        required: false
+        type: boolean
+        default: false
 permissions:
   contents: read
   pull-requests: write
@@ -19,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Package specific setup
+        if:  ${{ inputs.use_local_setup_action }}
+        uses: ./.github/actions/setup
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
