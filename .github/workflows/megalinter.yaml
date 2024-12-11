@@ -9,21 +9,23 @@ on:
     branches:
       - main
       - master
-  workflow_dispatch:
-  workflow_call:
+  workflow_dispatch: null
+  workflow_call: null
 permissions:
   contents: write
   issues: write
   pull-requests: write
 env:
+  DISABLE_LINTERS: REPOSITORY_GIT_DIFF
   ADDITIONAL_EXCLUDED_DIRECTORIES: dev
   APPLY_FIXES: all
   APPLY_FIXES_EVENT: none
   APPLY_FIXES_MODE: pull_request
   KICS_EXCLUDE_QUERIES: 555ab8f9-2001-455e-a077-f2d0f41e2fb9
-  SPELL_LYCHEE_FILE_EXTENSIONS: '*'
+  SPELL_LYCHEE_FILE_EXTENSIONS: "*"
+  SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 concurrency:
-  group: '${{ github.ref }}-${{ github.workflow }}'
+  group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
 jobs:
   megalinter:
@@ -33,31 +35,19 @@ jobs:
       - name: Set up node.js 20
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
-      - name: Checkout target repository
+          node-version: "20"
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          repository: NovoNordisk-OpenSource/r.workflows
-          ref: main
-          path: ./myactions
-      - name: Copy files for linters
-        run: |
-          cd ./myactions 
-          cp .github/linters/.cspell.json ../.cspell.json
-          cp .github/linters/.lintr ../.lintr
-          rm -rf ../myactions
+      - name: Copy linting config from r.workflows/main
         shell: bash
+        run: | 
+          curl --output .lintr  https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/main/.github/linters/.lintr
+          curl --output .cspell.json  https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/main/.github/linters/.cspell.json
       - name: MegaLinter
         id: ml
         uses: oxsecurity/megalinter@v7
         env:
-          VALIDATE_ALL_CODEBASE: >-
-            ${{ github.event_name == 'push' && github.ref == 'refs/heads/main'
-            }}
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+          VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       - name: Archive production artifacts
         if: success() || failure()
         uses: actions/upload-artifact@v4
@@ -68,54 +58,46 @@ jobs:
             mega-linter.log
       - name: Create Pull Request with applied fixes
         id: cpr
-        if: >-
-          steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT ==
-          'all' || env.APPLY_FIXES_EVENT == github.event_name) &&
-          env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push'
-          || github.event.pull_request.head.repo.full_name == github.repository)
-          && !contains(github.event.head_commit.message, 'skip fix')
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all'
+          || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE
+          == 'pull_request' && (github.event_name == 'push' ||
+          github.event.pull_request.head.repo.full_name == github.repository) &&
+          !contains(github.event.head_commit.message, 'skip fix')
         uses: peter-evans/create-pull-request@v6
         with:
-          token: >-
-            ${{ secrets.access-token || secrets.ACTION_PAT ||
-            secrets.GITHUB_TOKEN}}
-          commit-message: '[MegaLinter] Apply linters automatic fixes'
-          title: '[MegaLinter] Apply linters automatic fixes'
+          token: ${{ secrets.access-token || secrets.ACTION_PAT || secrets.GITHUB_TOKEN}}
+          commit-message: "[MegaLinter] Apply linters automatic fixes"
+          title: "[MegaLinter] Apply linters automatic fixes"
           labels: bot
       - name: Create PR output
-        if: >-
-          steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT ==
-          'all' || env.APPLY_FIXES_EVENT == github.event_name) &&
-          env.APPLY_FIXES_MODE == 'pull_request' && (github.event_name == 'push'
-          || github.event.pull_request.head.repo.full_name == github.repository)
-          && !contains(github.event.head_commit.message, 'skip fix')
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all'
+          || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE
+          == 'pull_request' && (github.event_name == 'push' ||
+          github.event.pull_request.head.repo.full_name == github.repository) &&
+          !contains(github.event.head_commit.message, 'skip fix')
         run: >
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number
-          }}"
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
 
           echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
       - name: Prepare commit
-        if: >-
-          steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT ==
-          'all' || env.APPLY_FIXES_EVENT == github.event_name) &&
-          env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' &&
-          (github.event_name == 'push' ||
-          github.event.pull_request.head.repo.full_name == github.repository) &&
-          !contains(github.event.head_commit.message, 'skip fix')
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all'
+          || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE
+          == 'commit' && github.ref != 'refs/heads/main' && (github.event_name
+          == 'push' || github.event.pull_request.head.repo.full_name ==
+          github.repository) && !contains(github.event.head_commit.message,
+          'skip fix')
         run: sudo chown -Rc $UID .git/
       - name: Commit and push applied linter fixes
-        if: >-
-          steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT ==
-          'all' || env.APPLY_FIXES_EVENT == github.event_name) &&
-          env.APPLY_FIXES_MODE == 'commit' && github.ref != 'refs/heads/main' &&
-          (github.event_name == 'push' ||
-          github.event.pull_request.head.repo.full_name == github.repository) &&
-          !contains(github.event.head_commit.message, 'skip fix')
+        if: steps.ml.outputs.has_updated_sources == 1 && (env.APPLY_FIXES_EVENT == 'all'
+          || env.APPLY_FIXES_EVENT == github.event_name) && env.APPLY_FIXES_MODE
+          == 'commit' && github.ref != 'refs/heads/main' && (github.event_name
+          == 'push' || github.event.pull_request.head.repo.full_name ==
+          github.repository) && !contains(github.event.head_commit.message,
+          'skip fix')
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          branch: >-
-            ${{ github.event.pull_request.head.ref || github.head_ref ||
-            github.ref }}
-          commit_message: '[MegaLinter] Apply linters fixes'
+          branch: ${{ github.event.pull_request.head.ref || github.head_ref || github.ref
+            }}
+          commit_message: "[MegaLinter] Apply linters fixes"
           commit_user_name: megalinter-bot
           commit_user_email: actions-robot@novonordisk.com
