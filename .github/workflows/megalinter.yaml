@@ -49,6 +49,10 @@ jobs:
           cp .github/linters/.lintr ../.lintr
           rm -rf ../myactions
         shell: bash
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: MegaLinter
         id: ml
         uses: oxsecurity/megalinter@v7
@@ -56,10 +60,6 @@ jobs:
           VALIDATE_ALL_CODEBASE: >-
             ${{ github.event_name == 'push' && github.ref == 'refs/heads/main'
             }}
-      - name: Checkout Code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: Archive production artifacts
         if: success() || failure()
         uses: actions/upload-artifact@v4
