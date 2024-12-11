@@ -16,6 +16,7 @@ permissions:
   issues: write
   pull-requests: write
 env:
+  DISABLE_LINTERS: REPOSITORY_GIT_DIFF
   ADDITIONAL_EXCLUDED_DIRECTORIES: dev
   APPLY_FIXES: all
   APPLY_FIXES_EVENT: none
