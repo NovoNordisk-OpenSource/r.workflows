@@ -23,6 +23,7 @@ env:
   APPLY_FIXES_MODE: pull_request
   KICS_EXCLUDE_QUERIES: 555ab8f9-2001-455e-a077-f2d0f41e2fb9
   SPELL_LYCHEE_FILE_EXTENSIONS: '*'
+  SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 concurrency:
   group: '${{ github.ref }}-${{ github.workflow }}'
   cancel-in-progress: true
