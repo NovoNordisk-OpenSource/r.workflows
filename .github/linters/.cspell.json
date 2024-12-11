@@ -8,5 +8,8 @@
       "pattern": "`{3}.*?`{3}"
     }
   ],
-  "ignoreRegExpList": ["code_chunk"]
+  "ignoreRegExpList": ["code_chunk"],
+  "words": [
+    "lintr"
+  ]
 }
