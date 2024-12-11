@@ -47,6 +47,7 @@ jobs:
           cd ./myactions 
           cp .github/linters/.cspell.json ../.cspell.json
           cp .github/linters/.lintr ../.lintr
+          cd ..
           rm -rf ../myactions
         shell: bash
       - name: Checkout Code
