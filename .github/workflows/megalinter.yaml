@@ -15,15 +15,6 @@ permissions:
   contents: write
   issues: write
   pull-requests: write
-env:
-  DISABLE_LINTERS: REPOSITORY_GIT_DIFF
-  ADDITIONAL_EXCLUDED_DIRECTORIES: dev
-  APPLY_FIXES: all
-  APPLY_FIXES_EVENT: none
-  APPLY_FIXES_MODE: pull_request
-  KICS_EXCLUDE_QUERIES: 555ab8f9-2001-455e-a077-f2d0f41e2fb9
-  SPELL_LYCHEE_FILE_EXTENSIONS: "*"
-  SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
@@ -41,6 +32,7 @@ jobs:
       - name: Copy linting config from r.workflows/main
         shell: bash
         run: | 
+          curl --output .mega-linter.yml  https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/main/.github/linters/.mega-linter.yml
           curl --output .lintr  https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/main/.github/linters/.lintr
           curl --output .cspell.json  https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/main/.github/linters/.cspell.json
       - name: MegaLinter
