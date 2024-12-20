@@ -24,6 +24,9 @@ on:
     branches:
       - main
       - master
+permissions:
+  contents: write
+  pull-requests: write
 name: All actions
 jobs:
   check-current-version:
