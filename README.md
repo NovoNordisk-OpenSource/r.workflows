@@ -8,7 +8,7 @@ It contains the following workflows:
 2. [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml): Same as 1., but uses the R version and packages available as per given lock dates.
 3. [Test coverage](.github/workflows/coverage.yaml): Derives test coverage for the package and publishes a summary table to the pull request.
 4. [pkgdown](.github/workflows/pkgdown.yaml): Renders and publishes a `pkgdown` website for your package (to your `gh-pages` branch). For a pull request the page is published to `{base url of package}/dev/{pr number}`, and a link to this development webpage is posted as a comment to your pull request.
-5. [megalinter](.github/workflows/megalinter.yaml): Lints your entire project using the [megalinter](https://megalinter.io/) tool.
+5. [megalinter](.github/workflows/megalinter.yaml): Lints your entire project using the [megalinter](https://megalinter.io/) tool. Note that for the [cspell](https://github.com/streetsidesoftware/cspell) linter words in `inst/WORDLIST` are automatically added as a dictionry if the file exists.
 
 ## Use in your package
 
