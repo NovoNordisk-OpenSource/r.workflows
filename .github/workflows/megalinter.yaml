@@ -13,7 +13,6 @@ on:
   workflow_call: null
 permissions:
   contents: write
-  issues: write
   pull-requests: write
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
