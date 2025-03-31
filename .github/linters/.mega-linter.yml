@@ -7,4 +7,4 @@ ADDITIONAL_EXCLUDED_DIRECTORIES:
   - dev
 SPELL_LYCHEE_FILE_EXTENSIONS: "*"
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
-MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps"
+MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENSE.md --ignore NEWS.md --ignore README.md --ignore cran-comments.md"
