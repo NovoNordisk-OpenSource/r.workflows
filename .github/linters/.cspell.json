@@ -12,7 +12,8 @@
     ".lintr",
     ".lycheeignore",
     "inst/WORDLIST",
-    "docs/**"
+    "docs/**",
+    "tests/testthat/*/**"
     ],
   "patterns": [
     {
@@ -20,6 +21,10 @@
       "pattern": "`{3}.*?`{3}"
     }
   ],
-  "ignoreRegExpList": ["code_chunk"],
-  "words": ["lintr"]
+  "ignoreRegExpList": [
+    "code_chunk"
+  ],
+  "words": [
+    "nolint"
+  ]
 }
