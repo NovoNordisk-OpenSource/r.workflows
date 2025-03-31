@@ -8,3 +8,6 @@ SPELL_LYCHEE_FILE_EXTENSIONS:
   - "*"
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENSE.md --ignore NEWS.md --ignore README.md --ignore cran-comments.md"
+HTML_HTMLHINT_ARGUMENTS: "--ignore tests/testthat/*/**"
+HTML_DJLINT_ARGUMENTS: "--exclude tests/testthat"
+

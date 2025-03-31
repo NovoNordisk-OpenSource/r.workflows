@@ -12,7 +12,8 @@
     ".lintr",
     ".lycheeignore",
     "inst/WORDLIST",
-    "docs/**"
+    "docs/**",
+    "tests/testthat/*/**"
     ],
   "patterns": [
     {
