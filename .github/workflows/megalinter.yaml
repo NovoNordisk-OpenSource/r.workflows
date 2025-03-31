@@ -41,7 +41,7 @@ jobs:
           fi
       - name: MegaLinter
         id: ml
-        uses: oxsecurity/megalinter
+        uses: oxsecurity/megalinter@latest
         env:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           APPLY_FIXES: all
