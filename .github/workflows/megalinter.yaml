@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up node.js 20
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@latest
         with:
           node-version: "20"
       - name: Checkout
