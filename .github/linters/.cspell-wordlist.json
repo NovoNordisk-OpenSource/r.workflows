@@ -7,8 +7,10 @@
     "README.md",
     ".gitignore",
     ".Rbuildignore",
+    ".mega-linter.yml",
     ".cspell.json",
     ".lintr",
+    ".lycheeignore",
     "inst/WORDLIST",
     "docs/**"
     ],

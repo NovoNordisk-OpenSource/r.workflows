@@ -7,9 +7,13 @@
     "README.md",
     ".gitignore",
     ".Rbuildignore",
+    ".mega-linter.yml",
     ".cspell.json",
-    ".lintr"
-  ],
+    ".lintr",
+    ".lycheeignore",
+    "inst/WORDLIST",
+    "docs/**"
+    ],
   "patterns": [
     {
       "name": "code_chunk",
