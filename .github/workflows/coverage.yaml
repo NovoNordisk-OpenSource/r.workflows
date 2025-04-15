@@ -81,6 +81,7 @@ jobs:
           header: coverage
           path: coverage.md
       - name: Upload coverage reports to Codecov with GitHub Action
+        if:  ${{ inputs.use_codecov }}
         uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
