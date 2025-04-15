@@ -43,6 +43,7 @@ jobs:
   coverage:
     name: Coverage report
     uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main
+    secrets: inherit # Required if use_code below is true, in order to access organisational codecov token
     with:
       use_codecov: false # Change to true if you want to upload coverage results to codecov.io.
   megalinter:
