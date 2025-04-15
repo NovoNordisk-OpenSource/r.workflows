@@ -12,6 +12,11 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
+      use_codecov:
+        description: Upload code coverage results to codecov.io
+        required: false
+        type: boolean
+        default: false
       use_local_setup_action:
         description: Use composite .github/actions/setup/action.yaml to setup package specific needs
         required: false
@@ -75,3 +80,7 @@ jobs:
           recreate: true
           header: coverage
           path: coverage.md
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v5
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
