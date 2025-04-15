@@ -87,3 +87,4 @@ jobs:
           fail_ci_if_error: true
           files: "./cobertura.xml"
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: ${{ github.repository }}
