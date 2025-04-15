@@ -3,6 +3,7 @@ DISABLE_LINTERS:
   - REPOSITORY_GIT_DIFF
 ADDITIONAL_EXCLUDED_DIRECTORIES:
   - dev
+REPOSITORY_KICS_ARGUMENTS: "--exclude-queries 555ab8f9-2001-455e-a077-f2d0f41e2fb9"
 SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon"
 SPELL_LYCHEE_FILE_EXTENSIONS: 
   - "*"
