@@ -6,7 +6,7 @@ It contains the following workflows:
 
 1. [R-CMD-check standard](.github/workflows/check_current_version.yaml): Standard R CMD check, that checks the package for current version of R on MacOs and Windows, and for the previous, current, and development version of R on Linux.
 2. [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml): Same as 1., but uses the R version and packages available as per given lock dates.
-3. [Test coverage](.github/workflows/coverage.yaml): Derives test coverage for the package and publishes a summary table to the pull request.
+3. [Test coverage](.github/workflows/coverage.yaml): Derives test coverage for the package and publishes a summary table to the pull request. For Open-Source repositories this also gives you the option to upload code coverage results to [codecov.io](https://codecov.io).
 4. [pkgdown](.github/workflows/pkgdown.yaml): Renders and publishes a `pkgdown` website for your package (to your `gh-pages` branch). For a pull request the page is published to `{base url of package}/dev/{pr number}`, and a link to this development webpage is posted as a comment to your pull request.
 5. [megalinter](.github/workflows/megalinter.yaml): Lints your entire project using the [megalinter](https://megalinter.io/) tool. Note that for the [cspell](https://github.com/streetsidesoftware/cspell) linter words in `inst/WORDLIST` are automatically added as a dictionary if the file exists.
 
@@ -43,6 +43,9 @@ jobs:
   coverage:
     name: Coverage report
     uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main
+    secrets: inherit # Required if use_code below is true, in order to access organisational codecov token
+    with:
+      use_codecov: false # Change to true if you want to upload coverage results to codecov.io.
   megalinter:
     name: Megalinter
     uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@main

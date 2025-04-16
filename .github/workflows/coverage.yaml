@@ -12,6 +12,11 @@ on:
   workflow_dispatch:
   workflow_call:
     inputs:
+      use_codecov:
+        description: Upload code coverage results to codecov.io
+        required: false
+        type: boolean
+        default: false
       use_local_setup_action:
         description: Use composite .github/actions/setup/action.yaml to setup package specific needs
         required: false
@@ -21,7 +26,7 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
-  test-coverage-internal:
+  test-coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -75,3 +80,12 @@ jobs:
           recreate: true
           header: coverage
           path: coverage.md
+      - name: Upload coverage reports to Codecov
+        if:  ${{ inputs.use_codecov }}
+        uses: codecov/codecov-action@v5
+        with:
+          fail_ci_if_error: true
+          files: "./cobertura.xml"
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: ${{ github.repository }}
+          verbose: true
