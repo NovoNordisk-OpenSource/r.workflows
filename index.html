@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r.workflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.1.9001</span>
       </span>
     </div>
 
@@ -66,7 +66,7 @@
 <li>
 <a href=".github/workflows/check_nn_versions.yaml">R-CMD-check NN versions</a>: Same as 1., but uses the R version and packages available as per given lock dates.</li>
 <li>
-<a href=".github/workflows/coverage.yaml">Test coverage</a>: Derives test coverage for the package and publishes a summary table to the pull request.</li>
+<a href=".github/workflows/coverage.yaml">Test coverage</a>: Derives test coverage for the package and publishes a summary table to the pull request. For Open-Source repositories this also gives you the option to upload code coverage results to <a href="https://codecov.io" class="external-link">codecov.io</a>.</li>
 <li>
 <a href=".github/workflows/pkgdown.yaml">pkgdown</a>: Renders and publishes a <code>pkgdown</code> website for your package (to your <code>gh-pages</code> branch). For a pull request the page is published to <code>{base url of package}/dev/{pr number}</code>, and a link to this development webpage is posted as a comment to your pull request.</li>
 <li>
@@ -104,9 +104,12 @@
 <span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage</span><span class="kw">:</span></span>
 <span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Coverage report</span></span>
 <span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="at">  </span><span class="fu">megalinter</span><span class="kw">:</span></span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Megalinter</span></span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@main</span></span></code></pre></div>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="at">    </span><span class="fu">secrets</span><span class="kw">:</span><span class="at"> inherit</span><span class="co"> # Required if use_code below is true, in order to access organisational codecov token</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="at">      </span><span class="fu">use_codecov</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # Change to true if you want to upload coverage results to codecov.io.</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="at">  </span><span class="fu">megalinter</span><span class="kw">:</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Megalinter</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@main</span></span></code></pre></div>
 <p>This will run all five workflows on your project whenever there is a push or a pull request to the <code>main</code>/<code>master</code> branch.</p>
 </div>
 <div class="section level2">
