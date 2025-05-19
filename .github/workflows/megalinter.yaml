@@ -32,12 +32,15 @@ jobs:
         shell: bash
         run: | 
           echo ===========
-          echo $GITHUB_REPOSITORY
-          echo $GITHUB_HEAD_REF
-          echo $GITHUB_REF_NAME
+          echo ${GITHUB_REPOSITORY}
+          echo ${GITHUB_HEAD_REF}
+          echo ${GITHUB_REF_NAME}
           echo ===========
           if [ "$GITHUB_REPOSITORY" = "NovoNordisk-OpenSource/r.workflows" ]; then
             workflow_branch=${GITHUB_HEAD_REF:-$GITHUB_REF_NAME}
+            echo =========
+            echo Using ${workflow_branch}
+            echo =========
           else
             workflow_branch="main"
           fi
