@@ -31,8 +31,11 @@ jobs:
       - name: Copy linting config from r.workflows/main
         shell: bash
         run: | 
+          echo ===========
+          echo $GITHUB_REPOSITORY
+          echo $GITHUB_REF_NAME
+          echo ===========
           if [ "GITHUB_REPOSITORY" = "NovoNordisk-OpenSource/r.workflows" ]; then
-            echo $GITHUB_REF_NAME
             workflow_branch="$GITHUB_REF_NAME"
           else
             workflow_branch="main"
