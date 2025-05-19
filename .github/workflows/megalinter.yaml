@@ -32,10 +32,8 @@ jobs:
         shell: bash
         run: | 
           if [ "GITHUB_REPOSITORY" = "NovoNordisk-OpenSource/r.workflows" ]; then
+            echo $GITHUB_REF_NAME
             workflow_branch="$GITHUB_REF_NAME"
-            echo --------------------->
-            echo $workflow_branch
-            echo --------------------->
           else
             workflow_branch="main"
           fi
