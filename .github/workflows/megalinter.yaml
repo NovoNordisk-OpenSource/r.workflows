@@ -44,13 +44,13 @@ jobs:
           else
             workflow_branch="main"
           fi
-          curl --output .mega-linter.yml https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.mega-linter.yml
-          curl --output .lintr https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lintr
-          curl --output .lycheeignore https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lycheeignore
+          curl --output .mega-linter.yml "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.mega-linter.yml"
+          curl --output .lintr "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lintr"
+          curl --output .lycheeignore "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lycheeignore"
           if [ -e "inst/WORDLIST" ]; then
-            curl --output .cspell.json https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell-wordlist.json
+            curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell-wordlist.json"
           else
-            curl --output .cspell.json https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell.json
+            curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell.json"
           fi
       - name: MegaLinter
         id: ml
