@@ -5,7 +5,7 @@ DISABLE_LINTERS:
 ADDITIONAL_EXCLUDED_DIRECTORIES:
   - dev
 REPOSITORY_KICS_ARGUMENTS: "--exclude-queries 555ab8f9-2001-455e-a077-f2d0f41e2fb9"
-SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon"
+SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon --exclude-path .lycheeignore"
 SPELL_LYCHEE_FILE_EXTENSIONS: 
   - "*"
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
