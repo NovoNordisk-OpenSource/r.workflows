@@ -44,7 +44,9 @@ jobs:
           else
             workflow_branch="main"
           fi
-          curl --output .mega-linter.yml "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.mega-linter.yml"
+          if [ ! -e ".mega-linter.yml" ]; then
+            curl --output .mega-linter.yml "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.mega-linter.yml"
+          fi
           curl --output .lintr "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lintr"
           curl --output .lycheeignore "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lycheeignore"
           if [ -e "inst/WORDLIST" ]; then
