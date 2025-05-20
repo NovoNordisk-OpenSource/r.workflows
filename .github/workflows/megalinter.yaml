@@ -45,14 +45,24 @@ jobs:
             workflow_branch="main"
           fi
           if [ ! -e ".mega-linter.yml" ]; then
+            echo "==> Adding .mega-linter.yml"
             curl --output .mega-linter.yml "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.mega-linter.yml"
           fi
-          curl --output .lintr "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lintr"
-          curl --output .lycheeignore "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lycheeignore"
-          if [ -e "inst/WORDLIST" ]; then
-            curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell-wordlist.json"
-          else
-            curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell.json"
+          if [ ! -e ".lintr" ]; then
+            echo "==> Adding .lintr"
+            curl --output .lintr "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lintr"
+          fi
+          if [ ! -e ".lycheeignore" ]; then
+            echo "==> Adding .lycheeignore"
+            curl --output .lycheeignore "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.lycheeignore"
+          fi
+          if [ ! -e ".cspell.json" ]; then
+            echo "==> Adding .cspell.json"
+            if [ -e "inst/WORDLIST" ]; then
+              curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell-wordlist.json"
+            else
+              curl --output .cspell.json "https://raw.githubusercontent.com/NovoNordisk-OpenSource/r.workflows/${workflow_branch}/.github/linters/.cspell.json"
+            fi
           fi
       - name: MegaLinter
         id: ml
