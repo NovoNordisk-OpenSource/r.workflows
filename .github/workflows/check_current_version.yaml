@@ -17,6 +17,11 @@ on:
         required: false
         type: boolean
         default: false
+      error-on:
+        description: 'What type of result should cause a build error?'
+        required: false
+        type: string
+        default: '"warning"'
 permissions:
   contents: read
 jobs:
@@ -40,6 +45,7 @@ jobs:
             r: oldrel-1
     env:
       R_KEEP_PKG_SOURCE: true
+      ERROR_ON_DEFAULT: '"warning"'
     steps:
       - uses: actions/checkout@v4
       - name: Package specific setup
@@ -58,3 +64,4 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          error-on: '${{ inputs.error-on || env.ERROR_ON_DEFAULT }}'
