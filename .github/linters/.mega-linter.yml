@@ -5,9 +5,25 @@ DISABLE_LINTERS:
 ADDITIONAL_EXCLUDED_DIRECTORIES:
   - dev
 REPOSITORY_KICS_ARGUMENTS: "--exclude-queries 555ab8f9-2001-455e-a077-f2d0f41e2fb9"
-SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon --exclude-path .lycheeignore --exclude-path .github/linters/.lycheeignore --exclude-path *.parquet$"
+SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon --exclude-path .lycheeignore --exclude-path .github/linters/.lycheeignore"
 SPELL_LYCHEE_FILE_EXTENSIONS: 
-  - '[".md", ".mdx", ".markdown", ".html", ".htm", ".rst", ".txt", ".json", ".jsonc", ".json5", ".yaml", ".yml", ".qmd", ".R", ".r", ".Rmd", ".rmd"]'
+  - ".md"
+  - ".mdx"
+  - ".markdown"
+  - ".html"
+  - ".htm"
+  - ".rst"
+  - ".txt"
+  - ".json"
+  - ".jsonc"
+  - ".json5"
+  - ".yaml"
+  - ".yml"
+  - ".qmd"
+  - ".R"
+  - ".r"
+  - ".Rmd"
+  - ".rmd"
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
 MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENSE.md --ignore NEWS.md --ignore README.md --ignore cran-comments.md"
 HTML_HTMLHINT_CLI_LINT_MODE: "project"
