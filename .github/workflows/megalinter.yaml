@@ -42,7 +42,7 @@ jobs:
             echo Using "${workflow_branch}"
             echo =========
           else
-            workflow_branch="main"
+            workflow_branch="update_lynchee"
           fi
           if [ ! -e ".mega-linter.yml" ]; then
             echo "==> Adding .mega-linter.yml"
