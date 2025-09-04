@@ -41,6 +41,7 @@ jobs:
           - date: 2024-08-06
             r: 4.4.1
     env:
+      GITHUB_PAT: ${{ secrets.ACTION_PAT }}
       R_KEEP_PKG_SOURCE: 'yes'
       ERROR_ON_DEFAULT: '"warning"'
     steps:
