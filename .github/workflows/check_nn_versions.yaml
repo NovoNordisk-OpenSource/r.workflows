@@ -22,6 +22,18 @@ on:
         required: false
         type: string
         default: '"warning"'
+      generate_token:
+        description: Generate token from GitHub app
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      TOKEN_APP_ID:
+        description: ID of the GitHub app used to generate a new token
+        required: false
+      TOKEN_APP_PRIVATE_KEY:
+        description: Private Key for the GitHub app used to generate a new token
+        required: false
 permissions:
   contents: read
 jobs:
@@ -45,6 +57,14 @@ jobs:
       ERROR_ON_DEFAULT: '"warning"'
     steps:
       - uses: actions/checkout@v4
+      - name: Generate custom token
+        id: generate-token
+        if:  ${{ inputs.generate_token }}
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.TOKEN_APP_ID }}
+          private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
       - name: Package specific setup
         if: ${{ inputs.use_local_setup_action }}
         uses: ./.github/actions/setup
@@ -55,6 +75,8 @@ jobs:
           use-public-rspm: false
           cran: 'https://packagemanager.posit.co/cran/${{matrix.config.date}}'
       - uses: r-lib/actions/setup-r-dependencies@v2
+        env:
+          GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
           extra-packages: 'any::rcmdcheck'
           needs: check

@@ -88,3 +88,33 @@ jobs:
 ...
 ```
 You can of course add much more complicated setup steps this way, but now Quarto is available for all following steps in the `R-CMD-check standard` workflow.
+
+## Install from private repositories in your organisation
+
+If you have dependencies on private repositories insider your GitHub organisation
+you need to run the workflows (excluding MegaLinter) with `generate_token: true` input,
+and supply an App Id and App Private key as secrets.
+
+Using e.g. the `R-CMD-check standard` workflow it can be done like this:
+
+```yaml
+...
+jobs:
+  check-current-version:
+    name: Check current version
+    uses: >-
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
+    secrets:
+      TOKEN_APP_ID: ${{ secrets.TOKEN_APP_ID }}
+      TOKEN_APP_PRIVATE_KEY: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
+    with:
+      generate_token: true
+...
+```
+
+Where the secrets point to a GitHub App in your organisation that have read access to the relevant
+repositories. Using the `actions/create-github-app-token@v2` action this generates a new token, that
+have the neccasary acess, to be used in the step setting up the R dependencies.
+
+See also [Authenticating with a GitHub App](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app)
+for more information on this way of authenticating.
