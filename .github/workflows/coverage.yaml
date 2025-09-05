@@ -40,8 +40,6 @@ permissions:
 jobs:
   test-coverage:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.ACTION_PAT }}
     steps:
       - uses: actions/checkout@v4
       - name: Generate custom token

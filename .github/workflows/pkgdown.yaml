@@ -40,8 +40,6 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: 'pkgdown-${{ github.event_name != ''pull_request'' || github.run_id }}'
-    env:
-      GITHUB_PAT: ${{ secrets.ACTION_PAT }}
     steps:
       - uses: actions/checkout@v4
       - name: Generate custom token
