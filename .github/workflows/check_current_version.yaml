@@ -11,6 +11,10 @@ on:
       - master
   workflow_dispatch:
   workflow_call:
+    secrets:
+      ACTION_TOKEN:
+        description: GitHub access token to use instead of default
+        required: false
     inputs:
       use_local_setup_action:
         description: Use composite .github/actions/setup/action.yaml to setup package specific needs
@@ -44,7 +48,7 @@ jobs:
           - os: ubuntu-latest
             r: oldrel-1
     env:
-      GITHUB_PAT: ${{ secrets.ACTION_PAT }}
+      GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN || secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: true
       ERROR_ON_DEFAULT: '"warning"'
     steps:
