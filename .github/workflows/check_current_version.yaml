@@ -34,7 +34,6 @@ on:
       TOKEN_APP_PRIVATE_KEY:
         description: Private Key for the GitHub app used to generate a new token
         required: false
-    
 permissions:
   contents: read
 jobs:
