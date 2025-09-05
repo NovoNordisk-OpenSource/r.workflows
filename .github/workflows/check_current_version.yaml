@@ -27,6 +27,14 @@ on:
         required: false
         type: boolean
         default: false
+    secrets:
+      TOKEN_APP_ID:
+        description: ID of the GitHub app used to generate a new token
+        required: false
+      TOKEN_APP_PRIVATE_KEY:
+        description: Private Key for the GitHub app used to generate a new token
+        required: false
+    
 permissions:
   contents: read
 jobs:
