@@ -137,6 +137,26 @@
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
 <p>You can of course add much more complicated setup steps this way, but now Quarto is available for all following steps in the <code>R-CMD-check standard</code> workflow.</p>
 </div>
+<div class="section level2">
+<h2 id="install-from-private-repositories-in-your-organisation">Install from private repositories in your organisation<a class="anchor" aria-label="anchor" href="#install-from-private-repositories-in-your-organisation"></a>
+</h2>
+<p>If you have dependencies on private repositories insider your GitHub organisation you need to run the workflows (excluding MegaLinter) with <code>generate_token: true</code> input, and supply an App Id and App Private key as secrets.</p>
+<p>Using e.g. the <code>R-CMD-check standard</code> workflow it can be done like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">...</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">jobs:</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">  check-current-version:</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">    name: Check current version</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">    uses: &gt;-</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">    secrets:</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">      TOKEN_APP_ID: ${{ secrets.TOKEN_APP_ID }}</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">      TOKEN_APP_PRIVATE_KEY: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">    with:</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">      generate_token: true</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
+<p>Where the secrets point to a GitHub App in your organisation that have read access to the relevant repositories. Using the <code>actions/create-github-app-token@v2</code> action this generates a new token, that have the neccasary acess, to be used in the step setting up the R dependencies.</p>
+<p>See also <a href="https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app" class="external-link">Authenticating with a GitHub App</a> for more information on this way of authenticating.</p>
+</div>
 </div>
   </div>
 
