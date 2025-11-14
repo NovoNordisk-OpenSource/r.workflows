@@ -74,6 +74,7 @@ jobs:
           r-version: '${{ matrix.config.r }}'
           use-public-rspm: false
           cran: 'https://packagemanager.posit.co/cran/${{matrix.config.date}}'
+          extra-repositories: 'https://novonordisk-opensource.r-universe.dev'
       - uses: r-lib/actions/setup-r-dependencies@v2
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
