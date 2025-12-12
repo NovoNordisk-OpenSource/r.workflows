@@ -43,18 +43,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os:
-          - macos-latest
-          - windows-latest
-          - ubuntu-latest
-        config:
-          - date: 2023-10-25
-            r: 4.3.1
-          - date: 2024-08-06
-            r: 4.4.1
+        - date: 2023-10-25
+          r: 4.3.1
+        - date: 2024-08-06
+          r: 4.4.1
         exclude:
-          - config:
-              - r: 4.3.1
+          - r: 4.3.1
+        include:
+          - os:
+            - macos-latest
+            - windows-latest
+            - ubuntu-latest
     env:
       R_KEEP_PKG_SOURCE: 'yes'
       ERROR_ON_DEFAULT: '"warning"'
