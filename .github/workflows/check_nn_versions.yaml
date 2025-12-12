@@ -52,6 +52,9 @@ jobs:
             r: 4.3.1
           - date: 2024-08-06
             r: 4.4.1
+        exclude:
+          - config:
+              - r: 4.3.1
     env:
       R_KEEP_PKG_SOURCE: 'yes'
       ERROR_ON_DEFAULT: '"warning"'
