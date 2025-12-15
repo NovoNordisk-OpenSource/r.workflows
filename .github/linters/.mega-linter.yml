@@ -30,4 +30,4 @@ HTML_HTMLHINT_CLI_LINT_MODE: "project"
 HTML_HTMLHINT_ARGUMENTS: "--ignore tests/testthat/*/**"
 HTML_DJLINT_CLI_LINT_MODE: "project"
 HTML_DJLINT_ARGUMENTS: "--exclude tests/testthat ."
-
+R_LINTR_CLI_LINT_MODE: "project"
