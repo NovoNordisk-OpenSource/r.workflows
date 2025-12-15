@@ -79,7 +79,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
-          extra-packages: 'any::rcmdcheck'
+          extra-packages: any::rcmdcheck, local::. 
           needs: check
       - uses: r-lib/actions/check-r-package@v2
         with:
