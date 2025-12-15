@@ -3,8 +3,8 @@
 #' @return A string saying hello and goodbye to the person
 #' @export
 #' @examples
-#' hellogoodbye("world")
-hellogoodbye <- function(name) {
+#' hello_goodbye("world")
+hello_goodbye <- function(name) {
   paste(
     hello(name),
     "and goodbye!"
