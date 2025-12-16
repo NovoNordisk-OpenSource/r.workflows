@@ -31,7 +31,7 @@ on:
         description: Minimum lock date to use for historic checks
         required: false
         type: string
-        default: "2000-01-01"
+        default: '2000-01-01'
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
