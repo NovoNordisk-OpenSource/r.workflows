@@ -5,7 +5,7 @@ Repository to manage GitHub Actions workflows for our Open-Source projects.
 It contains the following workflows:
 
 1. [R-CMD-check standard](.github/workflows/check_current_version.yaml): Standard R CMD check, that checks the package for current version of R on MacOs and Windows, and for the previous, current, and development version of R on Linux.
-2. [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml): Same as 1., but uses the R version and packages available as per given lock dates.
+2. [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml): Same as 1., but uses the R version and packages available as per given lock dates. See below for how to configure the lock dates.
 3. [Test coverage](.github/workflows/coverage.yaml): Derives test coverage for the package and publishes a summary table to the pull request. For Open-Source repositories this also gives you the option to upload code coverage results to [codecov.io](https://codecov.io).
 4. [pkgdown](.github/workflows/pkgdown.yaml): Renders and publishes a `pkgdown` website for your package (to your `gh-pages` branch). For a pull request the page is published to `{base url of package}/dev/{pr number}`, and a link to this development webpage is posted as a comment to your pull request.
 5. [megalinter](.github/workflows/megalinter.yaml): Lints your entire project using the [megalinter](https://megalinter.io/) tool. Note that for the [cspell](https://github.com/streetsidesoftware/cspell) linter words in `inst/WORDLIST` are automatically added as a dictionary if the file exists.
@@ -114,7 +114,26 @@ jobs:
 
 Where the secrets point to a GitHub App in your organisation that have read access to the relevant
 repositories. Using the `actions/create-github-app-token@v2` action this generates a new token, that
-have the neccasary acess, to be used in the step setting up the R dependencies.
+have the necessary access, to be used in the step setting up the R dependencies.
 
 See also [Authenticating with a GitHub App](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app)
 for more information on this way of authenticating.
+
+## Filter NN lock dates
+
+The lock dates used in [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml) can be
+configured using the `min_lock_date` input. This subsets the standard list of lock dates and
+their corresponding R versions to only include lock dates from this date going forward.
+
+The below snippet only uses lock dates from 06Aug2024 and going forward:
+
+```yaml
+  check-nn-version:
+    name: Check NN version
+    uses: >-
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@feat/min-nn-lock-date
+    with:
+      min_lock_date: '2024-08-06'
+```
+
+For list of used lock dates can be seen inside the workflow file.
