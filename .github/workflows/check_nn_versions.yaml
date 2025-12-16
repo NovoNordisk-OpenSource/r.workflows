@@ -52,7 +52,7 @@ jobs:
           EOF
       - id: filter
         run: |
-          echo config=$(jq '.[] | select(.date >= "2024-08-06")' t.json) >> "$GITHUB_OUTPUT"
+          echo config=$(jq '.[] | select(.date >= "2024-08-06")' config.json) >> "$GITHUB_OUTPUT"
   R-CMD-check:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
