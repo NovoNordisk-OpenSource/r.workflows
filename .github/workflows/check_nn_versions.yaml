@@ -46,6 +46,8 @@ jobs:
     runs-on: macos-latest
     outputs:
       config: ${{ steps.filter.outputs.config }}
+    env:
+      MIN_LOCK_DATE: ${{ inputs.min_lock_date }}
     steps:
       - name: NN lock dates and R versions
         run: |
@@ -58,8 +60,7 @@ jobs:
       - name: Filter lock dates
         id: filter
         run: |
-          export lock_date=${{ inputs.min_lock_date }}
-          echo config=$(jq --arg date $lock_date '.[] | select(.date >= $date)' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
+          echo config=$(jq --arg date $MIN_LOCK_DATE '.[] | select(.date >= $date)' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
   R-CMD-check:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
