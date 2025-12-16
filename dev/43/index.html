@@ -64,7 +64,7 @@
 <li>
 <a href=".github/workflows/check_current_version.yaml">R-CMD-check standard</a>: Standard R CMD check, that checks the package for current version of R on MacOs and Windows, and for the previous, current, and development version of R on Linux.</li>
 <li>
-<a href=".github/workflows/check_nn_versions.yaml">R-CMD-check NN versions</a>: Same as 1., but uses the R version and packages available as per given lock dates.</li>
+<a href=".github/workflows/check_nn_versions.yaml">R-CMD-check NN versions</a>: Same as 1., but uses the R version and packages available as per given lock dates. See below for how to configure the lock dates.</li>
 <li>
 <a href=".github/workflows/coverage.yaml">Test coverage</a>: Derives test coverage for the package and publishes a summary table to the pull request. For Open-Source repositories this also gives you the option to upload code coverage results to <a href="https://codecov.io" class="external-link">codecov.io</a>.</li>
 <li>
@@ -154,8 +154,21 @@
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="co">    with:</span></span>
 <span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">      generate_token: true</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
-<p>Where the secrets point to a GitHub App in your organisation that have read access to the relevant repositories. Using the <code>actions/create-github-app-token@v2</code> action this generates a new token, that have the neccasary acess, to be used in the step setting up the R dependencies.</p>
+<p>Where the secrets point to a GitHub App in your organisation that have read access to the relevant repositories. Using the <code>actions/create-github-app-token@v2</code> action this generates a new token, that have the necessary access, to be used in the step setting up the R dependencies.</p>
 <p>See also <a href="https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app" class="external-link">Authenticating with a GitHub App</a> for more information on this way of authenticating.</p>
+</div>
+<div class="section level2">
+<h2 id="filter-nn-lock-dates">Filter NN lock dates<a class="anchor" aria-label="anchor" href="#filter-nn-lock-dates"></a>
+</h2>
+<p>The lock dates used in <a href=".github/workflows/check_nn_versions.yaml">R-CMD-check NN versions</a> can be configured using the <code>min_lock_date</code> input. This subsets the standard list of lock dates and their corresponding R versions to only include lock dates from this date going forward.</p>
+<p>The below snippet only uses lock dates from 06Aug2024 and going forward:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="at">  </span><span class="fu">check-nn-version</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check NN version</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">    uses</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@feat/min-nn-lock-date</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">      </span><span class="fu">min_lock_date</span><span class="kw">:</span><span class="at"> </span><span class="st">'2024-08-06'</span></span></code></pre></div>
+<p>For list of used lock dates can be seen inside the workflow file.</p>
 </div>
 </div>
   </div>
