@@ -27,6 +27,11 @@ on:
         required: false
         type: boolean
         default: false
+      min_lock_date:
+        description: Minimum lock date to use for historic checks
+        required: false
+        type: string
+        default: "2000-01-01"
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
@@ -42,7 +47,7 @@ jobs:
     outputs:
       config: ${{ steps.filter.outputs.config }}
     steps:
-      - id: base
+      - name: NN lock dates and R versions
         run: |
           cat > config.json <<EOF
           [
@@ -50,9 +55,10 @@ jobs:
               {"date":"2024-08-06","r":"4.4.1"}
           ]
           EOF
-      - id: filter
+      - name: Filter lock dates
+        id: filter
         run: |
-          echo config=$(jq '.[] | select(.date >= "2024-08-06")' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
+          echo config=$(jq --arg date ${{ inputs.min_lock_date }} '.[] | select(.date >= $date)' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
   R-CMD-check:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
