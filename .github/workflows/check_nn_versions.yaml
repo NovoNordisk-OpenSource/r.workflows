@@ -37,7 +37,24 @@ on:
 permissions:
   contents: read
 jobs:
+  filter-nn-versions:
+    runs-on: macos-latest
+    outputs:
+      config: ${{ steps.filter.outputs.config }}
+    steps:
+      - id: base
+        run: |
+          cat > config.json <<EOF
+          [
+              {"date":"2023-10-25","r": "4.3.1"},
+              {"date":"2024-08-06","r":"4.4.1"}
+          ]
+          EOF
+      - id: filter
+        run: |
+          echo config=$(jq '.[] | select(.date >= "2024-08-06")' t.json) >> "$GITHUB_OUTPUT"
   R-CMD-check:
+    needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
     name: '${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})'
     strategy:
@@ -47,11 +64,7 @@ jobs:
           - macos-latest
           - windows-latest
           - ubuntu-latest
-        config:
-          - date: 2023-10-25
-            r: 4.3.1
-          - date: 2024-08-06
-            r: 4.4.1
+        config: ${{ fromJSON(needs.filter-nn-versions.outputs.config) }}
     env:
       R_KEEP_PKG_SOURCE: 'yes'
       ERROR_ON_DEFAULT: '"warning"'
