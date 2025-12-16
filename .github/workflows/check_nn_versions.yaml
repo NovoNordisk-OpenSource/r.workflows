@@ -58,7 +58,8 @@ jobs:
       - name: Filter lock dates
         id: filter
         run: |
-          echo config=$(jq --arg date ${{ inputs.min_lock_date }} '.[] | select(.date >= $date)' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
+          export lock_date=${{ inputs.min_lock_date }}
+          echo config=$(jq --arg date $lock_date '.[] | select(.date >= $date)' config.json | jq --slurp) >> "$GITHUB_OUTPUT"
   R-CMD-check:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
