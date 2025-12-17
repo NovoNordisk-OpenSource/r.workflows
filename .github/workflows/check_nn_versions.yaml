@@ -27,6 +27,11 @@ on:
         required: false
         type: boolean
         default: false
+      min_lock_date:
+        description: Minimum lock date to use for historic checks
+        required: false
+        type: string
+        default: '2000-01-01'
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
@@ -37,7 +42,27 @@ on:
 permissions:
   contents: read
 jobs:
+  filter-nn-versions:
+    runs-on: macos-latest
+    outputs:
+      config: ${{ steps.filter.outputs.config }}
+    env:
+      MIN_LOCK_DATE: ${{ inputs.min_lock_date || '2000-01-01' }}
+    steps:
+      - name: NN lock dates and R versions
+        run: |
+          cat > config.json <<EOF
+          [
+              {"date":"2023-10-25","r":"4.3.1"},
+              {"date":"2024-08-06","r":"4.4.1"}
+          ]
+          EOF
+      - name: Filter lock dates
+        id: filter
+        run: |
+          echo "jq --arg date $MIN_LOCK_DATE --compact-output '[.[] | select(.date >= $date)]' config.json" >> "$GITHUB_OUTPUT"
   R-CMD-check:
+    needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
     name: '${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})'
     strategy:
@@ -47,11 +72,7 @@ jobs:
           - macos-latest
           - windows-latest
           - ubuntu-latest
-        config:
-          - date: 2023-10-25
-            r: 4.3.1
-          - date: 2024-08-06
-            r: 4.4.1
+        config: ${{ fromJSON(needs.filter-nn-versions.outputs.config) }}
     env:
       R_KEEP_PKG_SOURCE: 'yes'
       ERROR_ON_DEFAULT: '"warning"'
