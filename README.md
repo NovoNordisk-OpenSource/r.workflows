@@ -131,7 +131,7 @@ The below snippet only uses lock dates from 06Aug2024 and going forward:
   check-nn-version:
     name: Check NN version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@feat/min-nn-lock-date
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main
     with:
       min_lock_date: '2024-08-06'
 ```
