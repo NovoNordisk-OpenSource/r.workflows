@@ -113,9 +113,8 @@ jobs:
           git commit -m "Update gh pages from the PR"
 
           git push
-
       - name: Restore original checkout for cleanup
-        if: github.event_name == 'pull_request' && inputs.use_local_setup_action
+        if: always() && inputs.use_local_setup_action
         uses: actions/checkout@v4
         with:
           clean: false
