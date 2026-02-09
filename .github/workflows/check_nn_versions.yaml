@@ -54,7 +54,8 @@ jobs:
           cat > config.json <<EOF
           [
               {"date":"2023-10-25","r":"4.3.1"},
-              {"date":"2024-08-06","r":"4.4.1"}
+              {"date":"2024-08-06","r":"4.4.1"},
+              {"date":"2025-12-05","r":"4.5.2"}
           ]
           EOF
       - name: Filter lock dates
