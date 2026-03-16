@@ -30,5 +30,5 @@ MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENS
 HTML_HTMLHINT_CLI_LINT_MODE: "project"
 HTML_HTMLHINT_ARGUMENTS: "--ignore tests/testthat/*/**"
 HTML_DJLINT_CLI_LINT_MODE: "project"
-HTML_DJLINT_ARGUMENTS: "--exclude tests/testthat ."
+HTML_DJLINT_ARGUMENTS: "--exclude tests/testthat --exclude megalinter-reports ."
 
