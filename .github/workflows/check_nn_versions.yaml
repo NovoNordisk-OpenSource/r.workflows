@@ -61,7 +61,7 @@ jobs:
       - name: Filter lock dates
         id: filter
         run: |
-          echo "config=$(jq --arg date $MIN_LOCK_DATE --compact-output '[.[] | select(.date >= $date)]' config.json)" >> "$GITHUB_OUTPUT"
+          echo "config=$(jq --arg date "$MIN_LOCK_DATE" --compact-output '[.[] | select(.date >= $date)]' config.json)" >> "$GITHUB_OUTPUT"
       - name: Validate filtered versions
         if: steps.filter.outputs.config == '[]'
         run: |
