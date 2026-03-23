@@ -61,7 +61,12 @@ jobs:
       - name: Filter lock dates
         id: filter
         run: |
-          echo "config=$(jq --arg date $MIN_LOCK_DATE --compact-output '[.[] | select(.date >= $date)]' config.json)" >> "$GITHUB_OUTPUT"
+          echo "config=$(jq --arg date "$MIN_LOCK_DATE" --compact-output '[.[] | select(.date >= $date)]' config.json)" >> "$GITHUB_OUTPUT"
+      - name: Validate filtered versions
+        if: steps.filter.outputs.config == '[]'
+        run: |
+          echo "::error::No R versions match min_lock_date '$MIN_LOCK_DATE'. Choose a date before the earliest configured version."
+          exit 1
   R-CMD-check:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
