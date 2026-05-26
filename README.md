@@ -113,7 +113,7 @@ jobs:
 ```
 
 Where the secrets point to a GitHub App in your organisation that have read access to the relevant
-repositories. Using the `actions/create-github-app-token@v2` action this generates a new token, that
+repositories. Using the `actions/create-github-app-token@v3` action this generates a new token, that
 have the necessary access, to be used in the step setting up the R dependencies.
 
 See also [Authenticating with a GitHub App](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app)

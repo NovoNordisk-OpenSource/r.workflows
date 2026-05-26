@@ -45,7 +45,7 @@ jobs:
       - name: Generate custom token
         id: generate-token
         if:  ${{ inputs.generate_token }}
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         with:
           app-id: ${{ secrets.TOKEN_APP_ID }}
           private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
