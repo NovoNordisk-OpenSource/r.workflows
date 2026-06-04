@@ -84,6 +84,8 @@ jobs:
           extra-packages: any::rcmdcheck, local::. 
           needs: check
       - uses: r-lib/actions/check-r-package@v2
+        env:
+          GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
           upload-snapshots: true
           error-on: '${{ inputs.error-on || env.ERROR_ON_DEFAULT }}'
