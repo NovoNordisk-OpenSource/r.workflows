@@ -23,12 +23,8 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - name: Set up node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Copy linting config from r.workflows/main
         shell: bash
         run: | 
@@ -67,13 +63,13 @@ jobs:
           fi
       - name: MegaLinter
         id: ml
-        uses: oxsecurity/megalinter@latest
+        uses: oxsecurity/megalinter@0e3ce9b9c8c10effb9b269509cc47ca17cae31c7 # v9.5.0
         env:
           VALIDATE_ALL_CODEBASE: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
           JAVASCRIPT_STANDARD_FILTER_REGEX_EXCLUDE: ${{ vars.JAVASCRIPT_STANDARD_FILTER_REGEX_EXCLUDE }}
       - name: Archive production artifacts
         if: success() || failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: MegaLinter reports
           path: |
