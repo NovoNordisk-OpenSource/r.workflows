@@ -42,11 +42,11 @@ jobs:
     concurrency:
       group: 'pkgdown-${{ github.event_name != ''pull_request'' || github.run_id }}'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Generate custom token
         id: generate-token
         if:  ${{ inputs.generate_token }}
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
         with:
           app-id: ${{ secrets.TOKEN_APP_ID }}
           private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
@@ -54,11 +54,11 @@ jobs:
       - name: Package specific setup
         if:  ${{ inputs.use_local_setup_action }}
         uses: ./.github/actions/setup
-      - uses: r-lib/actions/setup-pandoc@v2
-      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2.12.1
+      - uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2.12.1
         with:
           use-public-rspm: true
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - uses: r-lib/actions/setup-r-dependencies@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2.12.1
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
@@ -69,13 +69,13 @@ jobs:
         shell: 'Rscript {0}'
       - name: "Deploy to GitHub pages \U0001F680"
         if: github.event_name != 'pull_request'
-        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        uses: JamesIves/github-pages-deploy-action@65b5dfd4f5bcd3a7403bbc2959c144256167464e # v4.5.0
         with:
           clean: false
           branch: gh-pages
           folder: docs
       - name: Add pkgdown PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
+        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
         if: github.event_name == 'pull_request'
         with:
           recreate: true
@@ -94,7 +94,7 @@ jobs:
           cp -r ./docs/* /home/runner/work/dev
       - name: Check out gh-pages branch
         if: github.event_name == 'pull_request'
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           ref: gh-pages
       - name: Copy and push to gh-pages
@@ -116,6 +116,6 @@ jobs:
           git push
       - name: Restore original checkout for cleanup
         if: always() && inputs.use_local_setup_action
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           clean: false
