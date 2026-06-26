@@ -39,11 +39,11 @@ on:
       TOKEN_APP_PRIVATE_KEY:
         description: Private Key for the GitHub app used to generate a new token
         required: false
-permissions:
-  contents: read
+permissions: {}
 jobs:
   filter-nn-versions:
     runs-on: macos-latest
+    permissions: {}
     outputs:
       config: ${{ steps.filter.outputs.config }}
     env:
@@ -71,6 +71,8 @@ jobs:
     needs: filter-nn-versions
     runs-on: '${{ matrix.os }}'
     name: '${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})'
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:

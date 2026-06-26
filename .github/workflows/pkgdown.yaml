@@ -32,12 +32,13 @@ on:
       TOKEN_APP_PRIVATE_KEY:
         description: Private Key for the GitHub app used to generate a new token
         required: false
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 jobs:
   pkgdown:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     concurrency:
       group: 'pkgdown-${{ github.event_name != ''pull_request'' || github.run_id }}'
     steps:
