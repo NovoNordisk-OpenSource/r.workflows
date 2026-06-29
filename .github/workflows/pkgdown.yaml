@@ -99,22 +99,19 @@ jobs:
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           ref: gh-pages
+          persist-credentials: false
       - name: Copy and push to gh-pages
         if: github.event_name == 'pull_request'
-        run: >
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh auth setup-git
           mkdir -p dev/${{ github.event.pull_request.number }}
-
-          cp -r /home/runner/work/dev/* ./dev/${{
-          github.event.pull_request.number }}
-
+          cp -r /home/runner/work/dev/* ./dev/${{ github.event.pull_request.number }}
           git config --global user.email "actions-robot@novonordisk.com"
-
           git config --global user.name "Actions Robot From Github Actions"
-
           git add .
-
           git commit -m "Update gh pages from the PR"
-
           git push
       - name: Restore original checkout for cleanup
         if: always() && inputs.use_local_setup_action
