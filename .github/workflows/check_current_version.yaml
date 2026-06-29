@@ -27,6 +27,11 @@ on:
         required: false
         type: boolean
         default: false
+      token_repositories:
+        description: Comma- or newline-separated list of repos the app token grants access to
+        required: false
+        type: string
+        default: ${{ github.event.repository.name }}
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
@@ -71,6 +76,7 @@ jobs:
           app-id: ${{ secrets.TOKEN_APP_ID }}
           private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
+          repositories: ${{ inputs.token_repositories }}
           permission-contents: read
       - name: Package specific setup
         if:  ${{ inputs.use_local_setup_action }}
