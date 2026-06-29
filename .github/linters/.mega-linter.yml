@@ -27,7 +27,7 @@ SPELL_LYCHEE_FILE_EXTENSIONS:
   - ".Rmd"
   - ".rmd"
 SPELL_CSPELL_ANALYZE_FILE_NAMES: false
-MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENSE.md --ignore NEWS.md --ignore README.md --ignore cran-comments.md"
+MARKDOWN_MARKDOWNLINT_ARGUMENTS: "--ignore tests/testthat/_snaps --ignore LICENSE.md --ignore NEWS.md --ignore README.md --ignore cran-comments.md --ignore .github/pull_request_template.md"
 HTML_HTMLHINT_CLI_LINT_MODE: "project"
 HTML_HTMLHINT_ARGUMENTS: "--ignore tests/testthat/*/**"
 HTML_DJLINT_CLI_LINT_MODE: "project"
