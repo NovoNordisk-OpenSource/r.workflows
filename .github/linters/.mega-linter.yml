@@ -1,8 +1,9 @@
 DISABLE_LINTERS:
-  - REPOSITORY_GIT_DIFF
   - REPOSITORY_CHECKOV
-  - REPOSITORY_KINGFISHER
   - REPOSITORY_OSV_SCANNER
+# actionlint v1.7.12 does not know the job.workflow_sha context property,
+# which is used in megalinter.yaml to pin the linter-config checkout.
+ACTION_ACTIONLINT_ARGUMENTS: '-ignore ''property "workflow_sha" is not defined'''
 SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon --exclude-path .lycheeignore --exclude-path .github/linters/.lycheeignore"
 SPELL_LYCHEE_FILE_EXTENSIONS:
   - ".md"
