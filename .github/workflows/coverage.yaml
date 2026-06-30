@@ -68,6 +68,8 @@ jobs:
             any::knitr
           needs: coverage
       - name: Test coverage
+        env:
+          GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         run: |
           covr::package_coverage() |>
             covr::to_cobertura(filename = "cobertura.xml")
