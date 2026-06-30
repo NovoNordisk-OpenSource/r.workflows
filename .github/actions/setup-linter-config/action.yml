@@ -1,0 +1,40 @@
+---
+name: Setup linter config
+description: >-
+  Copy the central MegaLinter / lintr / lychee / cspell config files from
+  r.workflows into the consuming repo's working tree. Existing files in the
+  consumer are preserved (consumer wins).
+runs:
+  using: composite
+  steps:
+    - name: Install linter configs if absent
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+        src="${ACTION_PATH}/../../linters"
+        copy_if_absent() {
+          local name="$1"
+          local from="$2"
+          if [ ! -e "${name}" ]; then
+            echo "==> Adding ${name}"
+            cp "${from}" "${name}"
+          else
+            echo "==> Keeping existing ${name}"
+          fi
+        }
+        copy_if_absent ".mega-linter.yml" "${src}/.mega-linter.yml"
+        copy_if_absent ".lintr"           "${src}/.lintr"
+        copy_if_absent ".lycheeignore"    "${src}/.lycheeignore"
+        if [ ! -e ".cspell.json" ]; then
+          if [ -e "inst/WORDLIST" ]; then
+            echo "==> Adding .cspell.json (wordlist variant)"
+            cp "${src}/.cspell-wordlist.json" ".cspell.json"
+          else
+            echo "==> Adding .cspell.json"
+            cp "${src}/.cspell.json" ".cspell.json"
+          fi
+        else
+          echo "==> Keeping existing .cspell.json"
+        fi
