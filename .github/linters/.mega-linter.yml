@@ -1,6 +1,7 @@
 DISABLE_LINTERS:
   - REPOSITORY_CHECKOV
   - REPOSITORY_OSV_SCANNER
+R_LINTR_CLI_LINT_MODE: "project"
 SPELL_LYCHEE_ARGUMENTS: "--exclude-path man/figures --exclude-path docs --exclude-path pkgdown/favicon --exclude-path .lycheeignore --exclude-path .github/linters/.lycheeignore"
 SPELL_LYCHEE_FILE_EXTENSIONS:
   - ".md"
