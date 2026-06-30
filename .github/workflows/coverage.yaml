@@ -27,12 +27,20 @@ on:
         required: false
         type: boolean
         default: false
+      token_repositories:
+        description: Comma- or newline-separated list of repos the app token grants access to
+        required: false
+        type: string
+        default: ${{ github.event.repository.name }}
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
         required: false
       TOKEN_APP_PRIVATE_KEY:
         description: Private Key for the GitHub app used to generate a new token
+        required: false
+      CODECOV_TOKEN:
+        description: Codecov upload token
         required: false
 permissions: {}
 jobs:
@@ -43,6 +51,8 @@ jobs:
       pull-requests: write
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
       - name: Generate custom token
         id: generate-token
         if:  ${{ inputs.generate_token }}
@@ -51,6 +61,8 @@ jobs:
           app-id: ${{ secrets.TOKEN_APP_ID }}
           private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
+          repositories: ${{ inputs.token_repositories }}
+          permission-contents: read
       - name: Package specific setup
         if:  ${{ inputs.use_local_setup_action }}
         uses: ./.github/actions/setup

@@ -43,7 +43,7 @@ jobs:
   coverage:
     name: Coverage report
     uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main
-    secrets: inherit # Required if use_code below is true, in order to access organisational codecov token
+    secrets: inherit # Required if use_codecov below is true, in order to access organisational codecov token
     with:
       use_codecov: false # Change to true if you want to upload coverage results to codecov.io.
   megalinter:
@@ -109,12 +109,19 @@ jobs:
       TOKEN_APP_PRIVATE_KEY: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
     with:
       generate_token: true
+      token_repositories: |
+        private-dep-1
+        private-dep-2
 ...
 ```
 
 Where the secrets point to a GitHub App in your organisation that have read access to the relevant
 repositories. Using the `actions/create-github-app-token@v2` action this generates a new token, that
 have the necessary access, to be used in the step setting up the R dependencies.
+
+The `token_repositories` input scopes the token to the listed repositories. It defaults to the caller
+repository only, so set it to the names of the private dependency repos your package needs to install
+from. Accepts a comma- or newline-separated list.
 
 See also [Authenticating with a GitHub App](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/making-authenticated-api-requests-with-a-github-app-in-a-github-actions-workflow#authenticating-with-a-github-app)
 for more information on this way of authenticating.
