@@ -1,0 +1,11 @@
+---
+# actionlint v1.7.12 does not know about the job.workflow_sha context property,
+# which was added by GitHub Actions and is the resolved commit SHA of the
+# reusable workflow file. It is used in megalinter.yaml to pin the linter-config
+# checkout to the same SHA as the running workflow.
+self-hosted-runner:
+  labels: []
+config-variables: null
+paths: {}
+ignore:
+  - 'property "workflow_sha" is not defined in object type'
