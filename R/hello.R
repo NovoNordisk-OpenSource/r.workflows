@@ -6,6 +6,6 @@
 #' hello("world")
 hello <- function(name) {
   return(
-    paste("Hello", proper_case(name))
+    paste("Hello", name)
   )
 }
