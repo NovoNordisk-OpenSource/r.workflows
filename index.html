@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r.workflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.0.9000</span>
       </span>
     </div>
 
@@ -96,23 +96,23 @@
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="at">  </span><span class="fu">check-current-version</span><span class="kw">:</span></span>
 <span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check current version</span></span>
 <span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">    uses</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0</span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="at">  </span><span class="fu">check-nn-version</span><span class="kw">:</span></span>
 <span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check NN version</span></span>
 <span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="fu">    uses</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main</span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0</span>
 <span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="at">  </span><span class="fu">pkgdown</span><span class="kw">:</span></span>
 <span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Pkgdown site</span></span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/pkgdown.yaml@main</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/pkgdown.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3</span><span class="co"> # v0.1.0</span></span>
 <span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="at">  </span><span class="fu">coverage</span><span class="kw">:</span></span>
 <span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Coverage report</span></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3</span><span class="co"> # v0.1.0</span></span>
 <span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="at">    </span><span class="fu">secrets</span><span class="kw">:</span><span class="at"> inherit</span><span class="co"> # Required if use_codecov below is true, in order to access organisational codecov token</span></span>
 <span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="at">      </span><span class="fu">use_codecov</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # Change to true if you want to upload coverage results to codecov.io.</span></span>
 <span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="at">  </span><span class="fu">megalinter</span><span class="kw">:</span></span>
 <span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Megalinter</span></span>
-<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@main</span></span></code></pre></div>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="at">    </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3</span><span class="co"> # v0.1.0</span></span></code></pre></div>
 <p>This will run all five workflows on your project whenever there is a push or a pull request to the <code>main</code>/<code>master</code> branch.</p>
 </div>
 <div class="section level2">
@@ -134,7 +134,7 @@
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">  check-current-version:</span></span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">    name: Check current version</span></span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">    uses: &gt;-</span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0</span></span>
 <span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">    with:</span></span>
 <span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">      use_local_setup_action: true</span></span>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
@@ -150,7 +150,7 @@
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">  check-current-version:</span></span>
 <span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">    name: Check current version</span></span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co">    uses: &gt;-</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co">      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0</span></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co">    secrets:</span></span>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="co">      TOKEN_APP_ID: ${{ secrets.TOKEN_APP_ID }}</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">      TOKEN_APP_PRIVATE_KEY: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}</span></span>
@@ -172,7 +172,7 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="at">  </span><span class="fu">check-nn-version</span><span class="kw">:</span></span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check NN version</span></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="fu">    uses</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0</span>
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">      </span><span class="fu">min_lock_date</span><span class="kw">:</span><span class="at"> </span><span class="st">'2024-08-06'</span></span></code></pre></div>
 <p>For list of used lock dates can be seen inside the workflow file.</p>
