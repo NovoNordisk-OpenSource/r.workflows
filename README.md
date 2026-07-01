@@ -32,23 +32,23 @@ jobs:
   check-current-version:
     name: Check current version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
   check-nn-version:
     name: Check NN version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
   pkgdown:
     name: Pkgdown site
-    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/pkgdown.yaml@main
+    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/pkgdown.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
   coverage:
     name: Coverage report
-    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@main
+    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/coverage.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
     secrets: inherit # Required if use_codecov below is true, in order to access organisational codecov token
     with:
       use_codecov: false # Change to true if you want to upload coverage results to codecov.io.
   megalinter:
     name: Megalinter
-    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@main
+    uses: NovoNordisk-OpenSource/r.workflows/.github/workflows/megalinter.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
 ```
 
 This will run all five workflows on your project whenever there is a push or a pull request to the `main`/`master` branch.
@@ -82,7 +82,7 @@ jobs:
   check-current-version:
     name: Check current version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
     with:
       use_local_setup_action: true
 ...
@@ -103,7 +103,7 @@ jobs:
   check-current-version:
     name: Check current version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@main
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_current_version.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
     secrets:
       TOKEN_APP_ID: ${{ secrets.TOKEN_APP_ID }}
       TOKEN_APP_PRIVATE_KEY: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
@@ -138,7 +138,7 @@ The below snippet only uses lock dates from 06Aug2024 and going forward:
   check-nn-version:
     name: Check NN version
     uses: >-
-      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@fa1f70cce8b5544ddb31d8ea31dc2b917af1a4b3 # v0.1.0
     with:
       min_lock_date: '2024-08-06'
 ```
