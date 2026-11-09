@@ -1,6 +1,7 @@
 # r.workflows (development version)
 
 * Added a Dependabot configuration so actions pinned in the reusable workflows are updated weekly in a single grouped PR (#70).
+* Dropped the 2023-10-25 lock date (R 4.3.1) from `check_nn_versions.yaml`, as the pak binaries fail to load on R 4.3.1 on macOS.
 
 # r.workflows 0.1.1
 
