@@ -1,6 +1,6 @@
 ---
 name: test-coverage
-on:
+"on":
   push:
     branches:
       - main

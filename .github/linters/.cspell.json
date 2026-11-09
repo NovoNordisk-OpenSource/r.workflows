@@ -14,17 +14,13 @@
     "inst/WORDLIST",
     "docs/**",
     "tests/testthat/*/**"
-    ],
+  ],
   "patterns": [
     {
       "name": "code_chunk",
       "pattern": "`{3}.*?`{3}"
     }
   ],
-  "ignoreRegExpList": [
-    "code_chunk"
-  ],
-  "words": [
-    "nolint"
-  ]
+  "ignoreRegExpList": ["code_chunk"],
+  "words": ["nolint"]
 }

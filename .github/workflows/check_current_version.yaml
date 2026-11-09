@@ -1,6 +1,6 @@
 ---
 name: R-CMD-check standard
-on:
+"on":
   push:
     branches:
       - main
@@ -18,7 +18,7 @@ on:
         type: boolean
         default: false
       error-on:
-        description: 'What type of result should cause a build error?'
+        description: "What type of result should cause a build error?"
         required: false
         type: string
         default: '"warning"'
@@ -42,8 +42,8 @@ on:
 permissions: {}
 jobs:
   R-CMD-check:
-    runs-on: '${{ matrix.config.os }}'
-    name: '${{ matrix.config.os }} (${{ matrix.config.r }})'
+    runs-on: "${{ matrix.config.os }}"
+    name: "${{ matrix.config.os }} (${{ matrix.config.r }})"
     permissions:
       contents: read
     strategy:
@@ -70,7 +70,7 @@ jobs:
           persist-credentials: false
       - name: Generate custom token
         id: generate-token
-        if:  ${{ inputs.generate_token }}
+        if: ${{ inputs.generate_token }}
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           app-id: ${{ secrets.TOKEN_APP_ID }}
@@ -79,23 +79,23 @@ jobs:
           repositories: ${{ inputs.token_repositories }}
           permission-contents: read
       - name: Package specific setup
-        if:  ${{ inputs.use_local_setup_action }}
+        if: ${{ inputs.use_local_setup_action }}
         uses: ./.github/actions/setup
       - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         with:
-          r-version: '${{matrix.config.r}}'
-          http-user-agent: '${{matrix.config.http-user-agent}}'
+          r-version: "${{matrix.config.r}}"
+          http-user-agent: "${{matrix.config.http-user-agent}}"
           use-public-rspm: true
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
-          extra-packages: any::rcmdcheck, local::. 
+          extra-packages: any::rcmdcheck, local::.
           needs: check
       - uses: r-lib/actions/check-r-package@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
           upload-snapshots: true
-          error-on: '${{ inputs.error-on || env.ERROR_ON_DEFAULT }}'
+          error-on: "${{ inputs.error-on || env.ERROR_ON_DEFAULT }}"
