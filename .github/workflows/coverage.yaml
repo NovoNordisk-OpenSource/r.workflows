@@ -50,13 +50,13 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
       - name: Generate custom token
         id: generate-token
         if: ${{ inputs.generate_token }}
-        uses: actions/create-github-app-token@fee1f7d63c2ff003460e3d139729b119787bc349 # v2.2.2
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           app-id: ${{ secrets.TOKEN_APP_ID }}
           private-key: ${{ secrets.TOKEN_APP_PRIVATE_KEY }}
@@ -66,10 +66,10 @@ jobs:
       - name: Package specific setup
         if: ${{ inputs.use_local_setup_action }}
         uses: ./.github/actions/setup
-      - uses: r-lib/actions/setup-r@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2.12.1
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         with:
           use-public-rspm: true
-      - uses: r-lib/actions/setup-r-dependencies@d3c5be51b12e724e68f33216ca3c148b66d5f0b6 # v2.12.1
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
@@ -111,7 +111,7 @@ jobs:
             writeLines(con = "coverage.md")
         shell: "Rscript {0}"
       - name: Add Coverage PR Comment
-        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         with:
           recreate: true
@@ -119,7 +119,7 @@ jobs:
           path: coverage.md
       - name: Upload coverage reports to Codecov
         if: ${{ inputs.use_codecov }}
-        uses: codecov/codecov-action@5975040f7f7d40edaff8d784b576fd65ae95c073 # v5.5.5
+        uses: codecov/codecov-action@0fb7174895f61a3b6b78fc075e0cd60383518dac # v5.5.5
         with:
           fail_ci_if_error: true
           files: "./cobertura.xml"
