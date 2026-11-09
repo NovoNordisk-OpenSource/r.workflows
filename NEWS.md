@@ -1,3 +1,7 @@
+# r.workflows (development version)
+
+* Added a Dependabot configuration so actions pinned in the reusable workflows are updated weekly in a single grouped PR (#70).
+
 # r.workflows 0.1.1
 
 * Pinned all reusable workflow calls in README examples to the [v0.1.0](https://github.com/NovoNordisk-OpenSource/r.workflows/releases/tag/v0.1.0) release.
