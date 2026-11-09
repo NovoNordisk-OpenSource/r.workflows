@@ -1,6 +1,6 @@
 ---
 name: pkgdown
-on:
+"on":
   push:
     branches:
       - main

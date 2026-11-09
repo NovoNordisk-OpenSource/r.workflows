@@ -1,6 +1,6 @@
 ---
 name: R-CMD-check NN versions
-on:
+"on":
   push:
     branches:
       - main
@@ -18,7 +18,7 @@ on:
         type: boolean
         default: false
       error-on:
-        description: 'What type of result should cause a build error?'
+        description: "What type of result should cause a build error?"
         required: false
         type: string
         default: '"warning"'
@@ -36,7 +36,7 @@ on:
         description: Minimum lock date to use for historic checks
         required: false
         type: string
-        default: '2000-01-01'
+        default: "2000-01-01"
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
@@ -73,8 +73,8 @@ jobs:
           exit 1
   R-CMD-check:
     needs: filter-nn-versions
-    runs-on: '${{ matrix.os }}'
-    name: '${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})'
+    runs-on: "${{ matrix.os }}"
+    name: "${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})"
     permissions:
       contents: read
     strategy:
@@ -86,7 +86,7 @@ jobs:
           - ubuntu-latest
         config: ${{ fromJSON(needs.filter-nn-versions.outputs.config) }}
     env:
-      R_KEEP_PKG_SOURCE: 'yes'
+      R_KEEP_PKG_SOURCE: "yes"
       ERROR_ON_DEFAULT: '"warning"'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -94,7 +94,7 @@ jobs:
           persist-credentials: false
       - name: Generate custom token
         id: generate-token
-        if:  ${{ inputs.generate_token }}
+        if: ${{ inputs.generate_token }}
         uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         with:
           app-id: ${{ secrets.TOKEN_APP_ID }}
@@ -108,19 +108,19 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         with:
-          r-version: '${{ matrix.config.r }}'
+          r-version: "${{ matrix.config.r }}"
           use-public-rspm: false
-          cran: 'https://packagemanager.posit.co/cran/${{matrix.config.date}}'
-          extra-repositories: 'https://novonordisk-opensource.r-universe.dev'
+          cran: "https://packagemanager.posit.co/cran/${{matrix.config.date}}"
+          extra-repositories: "https://novonordisk-opensource.r-universe.dev"
       - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
-          extra-packages: any::rcmdcheck, local::. 
+          extra-packages: any::rcmdcheck, local::.
           needs: check
       - uses: r-lib/actions/check-r-package@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
           upload-snapshots: true
-          error-on: '${{ inputs.error-on || env.ERROR_ON_DEFAULT }}'
+          error-on: "${{ inputs.error-on || env.ERROR_ON_DEFAULT }}"
