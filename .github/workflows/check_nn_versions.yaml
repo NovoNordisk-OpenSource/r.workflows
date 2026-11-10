@@ -58,8 +58,8 @@ jobs:
         run: |
           cat > config.json <<EOF
           [
-              {"date":"2024-08-06","r":"4.4.1"},
-              {"date":"2025-12-05","r":"4.5.2"}
+              {"date":"2024-08-06","r":"4.4.1","ubuntu":"ubuntu-24.04"},
+              {"date":"2025-12-05","r":"4.5.2","ubuntu":"ubuntu-24.04"}
           ]
           EOF
       - name: Filter lock dates
@@ -73,7 +73,7 @@ jobs:
           exit 1
   R-CMD-check:
     needs: filter-nn-versions
-    runs-on: "${{ matrix.os }}"
+    runs-on: "${{ matrix.os == 'ubuntu-latest' && matrix.config.ubuntu || matrix.os }}"
     name: "${{ matrix.os }} (R ${{ matrix.config.r }}, ${{ matrix.config.date }})"
     permissions:
       contents: read

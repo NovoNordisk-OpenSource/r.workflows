@@ -143,4 +143,6 @@ The below snippet only uses lock dates from 06Aug2024 and going forward:
       min_lock_date: '2024-08-06'
 ```
 
-For list of used lock dates can be seen inside the workflow file.
+The list of lock dates can be seen inside the workflow file. Each lock date can also set the
+Ubuntu runner used for its Linux check, since old package versions built from source can fail
+to compile on `ubuntu-latest`. Lock dates without one run on `ubuntu-latest`.

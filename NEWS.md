@@ -1,3 +1,7 @@
+# r.workflows 0.1.3
+
+* `check_nn_versions.yaml` now runs each lock date on the Ubuntu version set for it in the lock date list, and both current lock dates use `ubuntu-24.04`. On `ubuntu-latest` (Ubuntu 26.04) packages from the 2025-12-05 lock date fail to build from source, e.g. `later` 1.4.4 against glibc 2.43.
+
 # r.workflows 0.1.2
 
 * Added a Dependabot configuration so actions pinned in the reusable workflows are updated weekly in a single grouped PR (#70).
