@@ -37,6 +37,13 @@ name: R-CMD-check NN versions
         required: false
         type: string
         default: "2000-01-01"
+      extra_packages:
+        description: >-
+          Comma- or newline-separated pak package references to install in addition to the
+          package dependencies, e.g. "mighty.metadata=?source" to build a dependency from source
+        required: false
+        type: string
+        default: ""
     secrets:
       TOKEN_APP_ID:
         description: ID of the GitHub app used to generate a new token
@@ -116,7 +123,10 @@ jobs:
         env:
           GITHUB_PAT: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
         with:
-          extra-packages: any::rcmdcheck, local::.
+          extra-packages: |
+            any::rcmdcheck
+            local::.
+            ${{ inputs.extra_packages }}
           needs: check
       - uses: r-lib/actions/check-r-package@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2.14.0
         env:

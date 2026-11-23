@@ -1,3 +1,7 @@
+# r.workflows 0.1.3
+
+* Added an `extra_packages` input to `check_nn_versions.yaml` to install additional pak package references, e.g. `mighty.metadata=?source` to build a dependency from source when its binary was built against newer dependencies than the lock date snapshot (#78).
+
 # r.workflows 0.1.2
 
 * Added a Dependabot configuration so actions pinned in the reusable workflows are updated weekly in a single grouped PR (#70).

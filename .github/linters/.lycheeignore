@@ -2,3 +2,5 @@
 http://svgjs.dev/svgjs
 # Path to RSPM yet to be derived
 https://packagemanager.posit.co/cran/\$
+# r-universe repository root rejects link checkers (403)
+https://novonordisk-opensource.r-universe.dev

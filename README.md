@@ -144,3 +144,21 @@ The below snippet only uses lock dates from 06Aug2024 and going forward:
 ```
 
 For list of used lock dates can be seen inside the workflow file.
+
+## Extra packages for NN versions check
+
+Use the `extra_packages` input of [R-CMD-check NN versions](.github/workflows/check_nn_versions.yaml)
+to install additional [pak package references](https://pak.r-lib.org/reference/pak_package_sources.html)
+on top of the package dependencies. Accepts a comma- or newline-separated list.
+
+This can be used to force a dependency to be built from source, e.g. when the available binary was
+built against a newer version of one of its dependencies than the one in the lock date snapshot:
+
+```yaml
+  check-nn-version:
+    name: Check NN version
+    uses: >-
+      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main
+    with:
+      extra_packages: mighty.metadata=?source
+```
