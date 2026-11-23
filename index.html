@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">r.workflows</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.3</span>
       </span>
     </div>
 
@@ -175,6 +175,18 @@
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="at">      </span><span class="fu">min_lock_date</span><span class="kw">:</span><span class="at"> </span><span class="st">'2024-08-06'</span></span></code></pre></div>
 <p>For list of used lock dates can be seen inside the workflow file.</p>
+</div>
+<div class="section level2">
+<h2 id="extra-packages-for-nn-versions-check">Extra packages for NN versions check<a class="anchor" aria-label="anchor" href="#extra-packages-for-nn-versions-check"></a>
+</h2>
+<p>Use the <code>extra_packages</code> input of <a href=".github/workflows/check_nn_versions.yaml">R-CMD-check NN versions</a> to install additional <a href="https://pak.r-lib.org/reference/pak_package_sources.html" class="external-link">pak package references</a> on top of the package dependencies. Accepts a comma- or newline-separated list.</p>
+<p>This can be used to force a dependency to be built from source, e.g. when the available binary was built against a newer version of one of its dependencies than the one in the lock date snapshot:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="at">  </span><span class="fu">check-nn-version</span><span class="kw">:</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="at">    </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Check NN version</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">    uses</span><span class="kw">: </span><span class="ch">&gt;-</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>      NovoNordisk-OpenSource/r.workflows/.github/workflows/check_nn_versions.yaml@main</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="at">    </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="at">      </span><span class="fu">extra_packages</span><span class="kw">:</span><span class="at"> mighty.metadata=?source</span></span></code></pre></div>
 </div>
 </div>
   </div>
